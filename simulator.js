@@ -6,30 +6,30 @@ const AWAY_TEAM = { abbr: 'SEA', name: 'Mariners', color: '#0B2C57', record: '85
 const HOME_TEAM = { abbr: 'TOR', name: 'Blue Jays', color: '#E8291C', record: '89-73' };
 
 const SEA_LINEUP = [
-  { name: 'J. Rodriguez', pos: 'CF', number: 44 },
+  { name: 'J. Rodríguez', pos: 'CF', number: 44 },
+  { name: 'R. Arozarena', pos: 'LF', number: 56 },
+  { name: 'J. Naylor', pos: '1B', number: 12 },
   { name: 'C. Raleigh', pos: 'C', number: 29 },
-  { name: 'R. Canó', pos: 'DH', number: 22 },
-  { name: 'T. France', pos: '1B', number: 21 },
-  { name: 'M. Haniger', pos: 'RF', number: 17 },
-  { name: 'E. Suárez', pos: '3B', number: 28 },
-  { name: 'J. Crawford', pos: 'SS', number: 3 },
-  { name: 'D. Moore', pos: '2B', number: 5 },
-  { name: 'J. Kelenic', pos: 'LF', number: 10 },
+  { name: 'B. Donovan', pos: '3B', number: 33 },
+  { name: 'L. Raley', pos: 'RF', number: 20 },
+  { name: 'M. Garver', pos: 'DH', number: 18 },
+  { name: 'C. Young', pos: 'SS', number: 2 },
+  { name: 'R. Bliss', pos: '2B', number: 1 },
 ];
 
 const TOR_LINEUP = [
-  { name: 'V. Guerrero Jr.', pos: '1B', number: 27 },
-  { name: 'B. Bichette', pos: 'SS', number: 11 },
   { name: 'G. Springer', pos: 'CF', number: 4 },
-  { name: 'D. Varsho', pos: 'LF', number: 25 },
+  { name: 'V. Guerrero Jr.', pos: '1B', number: 27 },
+  { name: 'A. Gimenez', pos: '2B', number: 0 },
+  { name: 'D. Varsho', pos: 'LF', number: 5 },
+  { name: 'J. Sanchez', pos: 'RF', number: 12 },
   { name: 'A. Kirk', pos: 'C', number: 30 },
-  { name: 'K. Kiermaier', pos: 'RF', number: 39 },
-  { name: 'M. Chapman', pos: '3B', number: 26 },
-  { name: 'S. Espinal', pos: '2B', number: 5 },
-  { name: 'D. Jansen', pos: 'DH', number: 9 },
+  { name: 'D. Schneider', pos: 'DH', number: 36 },
+  { name: 'A. Barger', pos: '3B', number: 47 },
+  { name: 'E. Clement', pos: 'SS', number: 22 },
 ];
 
-const SEA_PITCHER = { name: 'L. Gilbert', number: 45 };
+const SEA_PITCHER = { name: 'L. Gilbert', number: 36 };
 const TOR_PITCHER = { name: 'K. Gausman', number: 34 };
 
 // ---- State ----
