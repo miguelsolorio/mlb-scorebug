@@ -96,6 +96,30 @@ const dom = {
   base1: $('base-1'),
   base2: $('base-2'),
   base3: $('base-3'),
+  // Variant 2
+  v2: {
+    awayAbbr: $('v2-away-abbr'),
+    awayScore: $('v2-away-score'),
+    awayRow: $('v2-away-row'),
+    awayColorBar: $('v2-away-color-bar'),
+    awayPlayer: $('v2-away-player'),
+    awayPlayerBar: $('v2-away-player-bar'),
+    awayStat: $('v2-away-stat'),
+    homeAbbr: $('v2-home-abbr'),
+    homeScore: $('v2-home-score'),
+    homeRow: $('v2-home-row'),
+    homeColorBar: $('v2-home-color-bar'),
+    homePlayer: $('v2-home-player'),
+    homePlayerBar: $('v2-home-player-bar'),
+    homeStat: $('v2-home-stat'),
+    inningArrow: $('v2-inning-arrow'),
+    inningNumber: $('v2-inning-number'),
+    countText: $('v2-count-text'),
+    outs: $('v2-outs'),
+    base1: $('v2-base-1'),
+    base2: $('v2-base-2'),
+    base3: $('v2-base-3'),
+  },
   btnPlay: $('btn-play'),
   playIcon: $('play-icon'),
   pauseIcon: $('pause-icon'),
@@ -161,16 +185,63 @@ function render() {
   dom.base2.classList.toggle('occupied', s.bases[1]);
   dom.base3.classList.toggle('occupied', s.bases[2]);
 
-  // Game over
-  const existingBanner = document.querySelector('.game-over-banner');
-  if (s.gameOver && !existingBanner) {
-    const banner = document.createElement('div');
-    banner.className = 'game-over-banner';
-    banner.textContent = 'Final';
-    document.querySelector('.scorebug').appendChild(banner);
-  } else if (!s.gameOver && existingBanner) {
-    existingBanner.remove();
+  // ---- Variant 2 ----
+  const v = dom.v2;
+
+  v.awayAbbr.textContent = s.away.abbr;
+  v.awayColorBar.style.background = s.away.color;
+  v.homeAbbr.textContent = s.home.abbr;
+  v.homeColorBar.style.background = s.home.color;
+
+  v.awayScore.textContent = s.awayScore;
+  v.homeScore.textContent = s.homeScore;
+
+  v.awayRow.classList.toggle('at-bat', s.halfInning === 'top' && !s.gameOver);
+  v.homeRow.classList.toggle('at-bat', s.halfInning === 'bottom' && !s.gameOver);
+  v.awayPlayerBar.classList.toggle('at-bat', s.halfInning === 'top' && !s.gameOver);
+  v.homePlayerBar.classList.toggle('at-bat', s.halfInning === 'bottom' && !s.gameOver);
+
+  if (s.gameOver) {
+    v.awayPlayer.innerHTML = '';
+    v.homePlayer.innerHTML = '';
+    v.awayStat.textContent = '';
+    v.homeStat.textContent = '';
+  } else if (s.halfInning === 'top') {
+    const batterIdx = s.awayBatterIdx % 9;
+    const batter = s.awayLineup[batterIdx];
+    v.awayPlayer.innerHTML = `<strong>${batterIdx + 1}.</strong> ${lastName(batter.name)}`;
+    v.awayStat.textContent = `${batter.hits}-${batter.abs}`;
+    v.homePlayer.textContent = lastName(s.homePitcher.name);
+    v.homeStat.textContent = s.homePitchCount > 0 ? `P:${s.homePitchCount}` : '';
+  } else {
+    v.awayPlayer.textContent = lastName(s.awayPitcher.name);
+    v.awayStat.textContent = s.awayPitchCount > 0 ? `P:${s.awayPitchCount}` : '';
+    const batterIdx = s.homeBatterIdx % 9;
+    const batter = s.homeLineup[batterIdx];
+    v.homePlayer.innerHTML = `<strong>${batterIdx + 1}.</strong> ${lastName(batter.name)}`;
+    v.homeStat.textContent = `${batter.hits}-${batter.abs}`;
   }
+
+  v.inningNumber.textContent = formatInning(s.inning);
+  v.inningArrow.classList.toggle('bottom', s.halfInning === 'bottom');
+  v.countText.textContent = `${s.balls}-${s.strikes}`;
+  setDots(v.outs, s.outs);
+  v.base1.classList.toggle('occupied', s.bases[0]);
+  v.base2.classList.toggle('occupied', s.bases[1]);
+  v.base3.classList.toggle('occupied', s.bases[2]);
+
+  // Game over banners
+  document.querySelectorAll('.scorebug').forEach(bug => {
+    const banner = bug.querySelector('.game-over-banner');
+    if (s.gameOver && !banner) {
+      const el = document.createElement('div');
+      el.className = 'game-over-banner';
+      el.textContent = 'Final';
+      bug.appendChild(el);
+    } else if (!s.gameOver && banner) {
+      banner.remove();
+    }
+  });
 }
 
 function formatIP(totalOuts) {
@@ -187,10 +258,15 @@ function setDots(container, count) {
 }
 
 function flashScore(side) {
-  const el = side === 'away' ? dom.awayScore : dom.homeScore;
-  el.classList.remove('flash');
-  void el.offsetWidth;
-  el.classList.add('flash');
+  const els = [
+    side === 'away' ? dom.awayScore : dom.homeScore,
+    side === 'away' ? dom.v2.awayScore : dom.v2.homeScore,
+  ];
+  els.forEach(el => {
+    el.classList.remove('flash');
+    void el.offsetWidth;
+    el.classList.add('flash');
+  });
 }
 
 function log(text, type = '') {

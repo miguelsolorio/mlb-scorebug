@@ -21,6 +21,7 @@
 </head>
 <body>
   <div class="app">
+    <h1 class="app-title">MLB Scorebug Explorations</h1>
     <!-- Scorebug -->
     <div class="scorebug" id="scorebug">
       <!-- Teams & Score -->
@@ -79,6 +80,75 @@
             <rect id="base-3" class="base" x="1" y="18.5" width="15" height="15" rx="2" transform="rotate(45 8.5 26)"/>
             <rect id="base-1" class="base" x="36" y="18.5" width="15" height="15" rx="2" transform="rotate(45 43.5 26)"/>
           </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scorebug Variant 2 -->
+    <div class="scorebug v2" id="scorebug-v2">
+      <div class="v2-body">
+        <!-- Teams (each with player bar above) -->
+        <div class="v2-teams">
+          <div class="v2-team-col" id="v2-away-player-bar">
+            <div class="v2-player-bar">
+              <span class="v2-player-text" id="v2-away-player"></span>
+              <span class="v2-player-stat" id="v2-away-stat"></span>
+            </div>
+            <div class="team-card" id="v2-away-row">
+              <div class="team-color-bar" id="v2-away-color-bar"></div>
+              <img class="team-logo" id="v2-away-logo" src="https://www.mlbstatic.com/team-logos/136.svg" alt="SEA">
+              <div class="team-card-inner">
+                <span class="team-abbr" id="v2-away-abbr">SEA</span>
+              </div>
+              <div class="team-right">
+                <span class="team-score" id="v2-away-score">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="v2-team-col-divider"></div>
+          <div class="v2-team-col" id="v2-home-player-bar">
+            <div class="v2-player-bar">
+              <span class="v2-player-text" id="v2-home-player"></span>
+              <span class="v2-player-stat" id="v2-home-stat"></span>
+            </div>
+            <div class="team-card" id="v2-home-row">
+              <div class="team-color-bar" id="v2-home-color-bar"></div>
+              <img class="team-logo" id="v2-home-logo" src="https://www.mlbstatic.com/team-logos/141.svg" alt="TOR">
+              <div class="team-card-inner">
+                <span class="team-abbr" id="v2-home-abbr">TOR</span>
+              </div>
+              <div class="team-right">
+                <span class="team-score" id="v2-home-score">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Info -->
+        <div class="v2-game-info">
+          <div class="v2-info-left">
+            <div class="inning-block">
+              <div class="inning-arrow" id="v2-inning-arrow">
+                <svg width="10" height="6" viewBox="0 0 10 6">
+                  <polygon points="5,0 10,6 0,6" fill="currentColor"/>
+                </svg>
+              </div>
+              <span class="inning-number" id="v2-inning-number">1</span>
+            </div>
+            <div class="count-block">
+              <span class="count-text" id="v2-count-text">0-0</span>
+              <div class="outs-dots" id="v2-outs">
+                <span class="dot"></span><span class="dot"></span>
+              </div>
+            </div>
+          </div>
+          <div class="bases-block">
+            <svg class="bases-diamond" viewBox="-2 -2 56 56" width="34" height="34" overflow="visible">
+              <rect id="v2-base-2" class="base" x="18.5" y="1" width="15" height="15" rx="2" transform="rotate(45 26 8.5)"/>
+              <rect id="v2-base-3" class="base" x="1" y="18.5" width="15" height="15" rx="2" transform="rotate(45 8.5 26)"/>
+              <rect id="v2-base-1" class="base" x="36" y="18.5" width="15" height="15" rx="2" transform="rotate(45 43.5 26)"/>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
