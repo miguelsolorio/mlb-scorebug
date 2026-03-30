@@ -153,6 +153,62 @@
       </div>
     </div>
 
+    <!-- Scorebug Variant 3 -->
+    <div class="scorebug v3" id="scorebug-v3">
+      <!-- Teams with bases in between -->
+      <div class="v3-main">
+        <div class="v3-team" id="v3-away-row">
+          <div class="team-color-bar" id="v3-away-color-bar"></div>
+          <img class="team-logo" id="v3-away-logo" src="https://www.mlbstatic.com/team-logos/136.svg" alt="SEA">
+          <div class="team-card-inner">
+            <span class="team-abbr" id="v3-away-abbr">SEA</span>
+          </div>
+          <span class="team-score" id="v3-away-score">0</span>
+        </div>
+        <div class="v3-bases-center">
+          <svg class="bases-diamond" viewBox="-2 -2 56 56" width="30" height="30" overflow="visible">
+            <rect id="v3-base-2" class="base" x="18.5" y="1" width="15" height="15" rx="2" transform="rotate(45 26 8.5)"/>
+            <rect id="v3-base-3" class="base" x="1" y="18.5" width="15" height="15" rx="2" transform="rotate(45 8.5 26)"/>
+            <rect id="v3-base-1" class="base" x="36" y="18.5" width="15" height="15" rx="2" transform="rotate(45 43.5 26)"/>
+          </svg>
+        </div>
+        <div class="v3-team" id="v3-home-row">
+          <div class="team-color-bar" id="v3-home-color-bar"></div>
+          <img class="team-logo" id="v3-home-logo" src="https://www.mlbstatic.com/team-logos/141.svg" alt="TOR">
+          <div class="team-card-inner">
+            <span class="team-abbr" id="v3-home-abbr">TOR</span>
+          </div>
+          <span class="team-score" id="v3-home-score">0</span>
+        </div>
+      </div>
+      <!-- Inning & Count -->
+      <div class="v3-info-bar">
+        <div class="inning-block">
+          <div class="inning-arrow" id="v3-inning-arrow">
+            <svg width="8" height="5" viewBox="0 0 10 6">
+              <polygon points="5,0 10,6 0,6" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="inning-number" id="v3-inning-number">1</span>
+        </div>
+        <span class="count-text" id="v3-count-text">0-0</span>
+        <div class="outs-dots" id="v3-outs">
+          <span class="dot"></span><span class="dot"></span>
+        </div>
+      </div>
+      <!-- Players -->
+      <div class="v3-players">
+        <div class="v3-player-bar" id="v3-away-player-bar">
+          <span class="v2-player-text" id="v3-away-player"></span>
+          <span class="v2-player-stat" id="v3-away-stat"></span>
+        </div>
+        <div class="v3-player-bar" id="v3-home-player-bar">
+          <span class="v2-player-text" id="v3-home-player"></span>
+          <span class="v2-player-stat" id="v3-home-stat"></span>
+        </div>
+      </div>
+    </div>
+
     <!-- Simulator Controls -->
     <div class="controls">
       <h2 class="controls-title">Game Simulator</h2>

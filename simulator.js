@@ -120,6 +120,30 @@ const dom = {
     base2: $('v2-base-2'),
     base3: $('v2-base-3'),
   },
+  // Variant 3
+  v3: {
+    awayAbbr: $('v3-away-abbr'),
+    awayScore: $('v3-away-score'),
+    awayRow: $('v3-away-row'),
+    awayColorBar: $('v3-away-color-bar'),
+    awayPlayer: $('v3-away-player'),
+    awayPlayerBar: $('v3-away-player-bar'),
+    awayStat: $('v3-away-stat'),
+    homeAbbr: $('v3-home-abbr'),
+    homeScore: $('v3-home-score'),
+    homeRow: $('v3-home-row'),
+    homeColorBar: $('v3-home-color-bar'),
+    homePlayer: $('v3-home-player'),
+    homePlayerBar: $('v3-home-player-bar'),
+    homeStat: $('v3-home-stat'),
+    inningArrow: $('v3-inning-arrow'),
+    inningNumber: $('v3-inning-number'),
+    countText: $('v3-count-text'),
+    outs: $('v3-outs'),
+    base1: $('v3-base-1'),
+    base2: $('v3-base-2'),
+    base3: $('v3-base-3'),
+  },
   btnPlay: $('btn-play'),
   playIcon: $('play-icon'),
   pauseIcon: $('pause-icon'),
@@ -230,6 +254,51 @@ function render() {
   v.base2.classList.toggle('occupied', s.bases[1]);
   v.base3.classList.toggle('occupied', s.bases[2]);
 
+  // ---- Variant 3 ----
+  const w = dom.v3;
+
+  w.awayAbbr.textContent = s.away.abbr;
+  w.awayColorBar.style.background = s.away.color;
+  w.homeAbbr.textContent = s.home.abbr;
+  w.homeColorBar.style.background = s.home.color;
+
+  w.awayScore.textContent = s.awayScore;
+  w.homeScore.textContent = s.homeScore;
+
+  w.awayRow.classList.toggle('at-bat', s.halfInning === 'top' && !s.gameOver);
+  w.homeRow.classList.toggle('at-bat', s.halfInning === 'bottom' && !s.gameOver);
+  w.awayPlayerBar.classList.toggle('at-bat', s.halfInning === 'top' && !s.gameOver);
+  w.homePlayerBar.classList.toggle('at-bat', s.halfInning === 'bottom' && !s.gameOver);
+
+  if (s.gameOver) {
+    w.awayPlayer.innerHTML = '';
+    w.homePlayer.innerHTML = '';
+    w.awayStat.textContent = '';
+    w.homeStat.textContent = '';
+  } else if (s.halfInning === 'top') {
+    const batterIdx = s.awayBatterIdx % 9;
+    const batter = s.awayLineup[batterIdx];
+    w.awayPlayer.innerHTML = `<strong>${batterIdx + 1}.</strong> ${lastName(batter.name)}`;
+    w.awayStat.textContent = `${batter.hits}-${batter.abs}`;
+    w.homePlayer.textContent = lastName(s.homePitcher.name);
+    w.homeStat.textContent = s.homePitchCount > 0 ? `P:${s.homePitchCount}` : '';
+  } else {
+    w.awayPlayer.textContent = lastName(s.awayPitcher.name);
+    w.awayStat.textContent = s.awayPitchCount > 0 ? `P:${s.awayPitchCount}` : '';
+    const batterIdx = s.homeBatterIdx % 9;
+    const batter = s.homeLineup[batterIdx];
+    w.homePlayer.innerHTML = `<strong>${batterIdx + 1}.</strong> ${lastName(batter.name)}`;
+    w.homeStat.textContent = `${batter.hits}-${batter.abs}`;
+  }
+
+  w.inningNumber.textContent = formatInning(s.inning);
+  w.inningArrow.classList.toggle('bottom', s.halfInning === 'bottom');
+  w.countText.textContent = `${s.balls}-${s.strikes}`;
+  setDots(w.outs, s.outs);
+  w.base1.classList.toggle('occupied', s.bases[0]);
+  w.base2.classList.toggle('occupied', s.bases[1]);
+  w.base3.classList.toggle('occupied', s.bases[2]);
+
   // Game over banners
   document.querySelectorAll('.scorebug').forEach(bug => {
     const banner = bug.querySelector('.game-over-banner');
@@ -261,6 +330,7 @@ function flashScore(side) {
   const els = [
     side === 'away' ? dom.awayScore : dom.homeScore,
     side === 'away' ? dom.v2.awayScore : dom.v2.homeScore,
+    side === 'away' ? dom.v3.awayScore : dom.v3.homeScore,
   ];
   els.forEach(el => {
     el.classList.remove('flash');
